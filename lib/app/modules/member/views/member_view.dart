@@ -172,12 +172,14 @@ class MemberView extends GetView<MemberController> {
       itemBuilder: (context, index) {
         User item = list[index];
         return Container(
-          padding: EdgeInsets.fromLTRB(13, 10, 16, 10),
+          padding: EdgeInsets.fromLTRB(13, 20, 16, 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CircleAvatar(
@@ -186,37 +188,65 @@ class MemberView extends GetView<MemberController> {
                   ),
                   Expanded(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ResponsiveText(text: '${item.name}'),
-                            ResponsiveText(text: '${item.age}')
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ResponsiveText(text: '${item.position}'),
-                            ResponsiveText(text: '${item.job}')
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ResponsiveText(text: '${item.company}'),
-                                ResponsiveText(text: '${item.address}'),
-                              ],
-                            ),
-                          ],
-                        ),
+                        ResponsiveText(text: '${item.name}'),
+                        ResponsiveText(text: '${item.position}'),
+                        ResponsiveText(text: '${item.company}'),
+                        ResponsiveText(text: '${item.address}'),
                       ],
                     ),
                   ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        ResponsiveText(text: '${item.age}'),
+                        ResponsiveText(text: '${item.job}'),
+                      ],
+                    ),
+                  ),
+                  // Expanded(
+                  //   child: Column(
+                  //     // mainAxisAlignment: MainAxisAlignment.start,
+                  //     // crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //         crossAxisAlignment: CrossAxisAlignment.end,
+                  //         children: [
+                  //           Expanded(
+                  //               child: ResponsiveText(text: '${item.name}')),
+                  //           Expanded(child: ResponsiveText(text: '${item.age}'))
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         children: [
+                  //           Expanded(
+                  //               child:
+                  //                   ResponsiveText(text: '${item.position}')),
+                  //           Expanded(
+                  //               child: ResponsiveText(text: '${item.job}')),
+                  //         ],
+                  //       ),
+                  //       Row(
+                  //         children: [
+                  //           Expanded(
+                  //             child: Column(
+                  //               crossAxisAlignment: CrossAxisAlignment.start,
+                  //               children: [
+                  //                 ResponsiveText(text: '${item.company}'),
+                  //                 ResponsiveText(text: '${item.address}'),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
               SizedBox(
@@ -224,7 +254,6 @@ class MemberView extends GetView<MemberController> {
               ),
               Container(
                 padding: EdgeInsets.all(12),
-                height: 38,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(
                       Radius.circular(5),
