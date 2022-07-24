@@ -167,6 +167,7 @@ class MemberView extends GetView<MemberController> {
         crossAxisSpacing: 16,
         childAspectRatio: 1.6,
         mainAxisSpacing: 16,
+        mainAxisExtent: 150,
       ),
       itemBuilder: (context, index) {
         User item = list[index];
@@ -216,32 +217,6 @@ class MemberView extends GetView<MemberController> {
                       ],
                     ),
                   ),
-                  // Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.start,
-                  //   children: [
-                  //     Text(
-                  //       '${item.company}',
-                  //       overflow: TextOverflow.ellipsis,
-                  //       maxLines: 1,
-                  //       style: TextStyle(
-                  //         fontSize: 10,
-                  //       ),
-                  //     ),
-                  //     Text(
-                  //       '${item.address}',
-                  //       overflow: TextOverflow.ellipsis,
-                  //       maxLines: 1,
-                  //       style: TextStyle(
-                  //         fontSize: 10,
-                  //       ),
-                  //     ),
-
-                  //     // ResponsiveText(text: '${item.name}'),
-                  //     // ResponsiveText(text: '${item.position}'),
-                  //     // ResponsiveText(text: '${item.company}'),
-                  //     // ResponsiveText(text: '${item.address}'),
-                  //   ],
-                  // ),
                 ],
               ),
               SizedBox(

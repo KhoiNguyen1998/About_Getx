@@ -7,12 +7,13 @@ class MemberController extends GetxController
     with GetSingleTickerProviderStateMixin {
   final listNormalMember = [].obs;
   final listPremiumMember = [].obs;
+  final isFetching = false.obs;
 
   late TabController tabController;
   // final _swipeIsInProgress = false.obs;
   // final _tapIsBeingExecuted = false.obs;
-  RxInt selectedIndex = 0.obs;
-  final prevIndex = 0.obs;
+  // RxInt selectedIndex = 0.obs;
+  // final prevIndex = 0.obs;
 
   @override
   void onInit() {
@@ -22,7 +23,7 @@ class MemberController extends GetxController
     tabController = TabController(length: 2, vsync: this);
     tabController.addListener(() {
       if (tabController.indexIsChanging) {
-        selectedIndex = tabController.index as RxInt;
+        // selectedIndex = tabController.index as RxInt;
       } else {}
     });
   }
@@ -36,6 +37,11 @@ class MemberController extends GetxController
   void onClose() {
     tabController.dispose();
     super.onClose();
+  }
+
+  fetchingData() {
+    if (isFetching == true) {
+    } else {}
   }
 
   addNormalMEmber() async {
