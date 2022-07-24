@@ -176,15 +176,19 @@ class MemberView extends GetView<MemberController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             // crossAxisAlignment: CrossAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CircleAvatar(
-                    radius: 25,
-                    backgroundImage: NetworkImage('${item.avatar}'),
+                  Expanded(
+                    child: CircleAvatar(
+                      radius: 25,
+                      backgroundImage: NetworkImage('${item.avatar}'),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 5,
                   ),
                   Expanded(
                     child: Column(
@@ -199,7 +203,6 @@ class MemberView extends GetView<MemberController> {
                   ),
                   Expanded(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         ResponsiveText(text: '${item.age}'),
@@ -207,46 +210,6 @@ class MemberView extends GetView<MemberController> {
                       ],
                     ),
                   ),
-                  // Expanded(
-                  //   child: Column(
-                  //     // mainAxisAlignment: MainAxisAlignment.start,
-                  //     // crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  //         crossAxisAlignment: CrossAxisAlignment.end,
-                  //         children: [
-                  //           Expanded(
-                  //               child: ResponsiveText(text: '${item.name}')),
-                  //           Expanded(child: ResponsiveText(text: '${item.age}'))
-                  //         ],
-                  //       ),
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           Expanded(
-                  //               child:
-                  //                   ResponsiveText(text: '${item.position}')),
-                  //           Expanded(
-                  //               child: ResponsiveText(text: '${item.job}')),
-                  //         ],
-                  //       ),
-                  //       Row(
-                  //         children: [
-                  //           Expanded(
-                  //             child: Column(
-                  //               crossAxisAlignment: CrossAxisAlignment.start,
-                  //               children: [
-                  //                 ResponsiveText(text: '${item.company}'),
-                  //                 ResponsiveText(text: '${item.address}'),
-                  //               ],
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
                 ],
               ),
               SizedBox(
