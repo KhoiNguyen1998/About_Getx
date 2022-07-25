@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_ttr/app/data/model/author.dart';
 import 'package:flutter_getx_ttr/until/const/const.dart';
@@ -217,17 +218,29 @@ class MemberView extends GetView<MemberController> {
                 SizedBox(
                   height: 10,
                 ),
-                Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(5),
+                Expanded(
+                  child: Container(
+                    height: 38,
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5),
+                        ),
+                        border: Border.all(
+                          color: boderContainerColor,
+                          width: 0.3,
+                        )),
+                    child: Center(
+                      child: AutoSizeText(
+                        '${item.bio}',
+                        maxLines: 2,
+                        minFontSize: 10,
+                        maxFontSize: 15,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
                       ),
-                      border: Border.all(
-                        color: boderContainerColor,
-                        width: 0.3,
-                      )),
-                  child: ResponsiveText(text: '${item.bio}'),
+                    ),
+                  ),
                 ),
               ],
             ),
