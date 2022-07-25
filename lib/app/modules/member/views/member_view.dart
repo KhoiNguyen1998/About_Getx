@@ -70,7 +70,7 @@ class MemberView extends GetView<MemberController> {
                     child: Container(
                       child: Row(
                         children: [
-                          SvgPicture.asset(svg_clock),
+                          SvgPicture.asset(svg_dis_Clock),
                           // Obx(() => controller.selectedIndex),
                           SizedBox(
                             width: 4,
@@ -104,11 +104,12 @@ class MemberView extends GetView<MemberController> {
               ),
               Expanded(
                 child: TabBarView(
-                  // physics: NeverScrollableScrollPhysics(),
                   controller: controller.tabController,
                   children: [
-                    Obx(() => gridMember(controller.listNormalMember)),
-                    Obx(() => gridMember(controller.listPremiumMember)),
+                    Obx(() => gridMember(controller.listNormalMember,
+                        controller.addNormalMEmber())),
+                    Obx(() => gridMember(controller.listPremiumMember,
+                        controller.addPremiumMember())),
                   ],
                 ),
               ),
@@ -158,79 +159,81 @@ class MemberView extends GetView<MemberController> {
     );
   }
 
-  Widget gridMember(RxList list) {
-    return GridView.builder(
-      shrinkWrap: true,
-      itemCount: list.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        childAspectRatio: 1.6,
-        mainAxisSpacing: 16,
-        mainAxisExtent: 150,
+  Widget gridMember(RxList list, refresh) {
+    return RefreshIndicator(
+      onRefresh: () => refresh,
+      child: GridView.builder(
+        shrinkWrap: true,
+        itemCount: list.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          childAspectRatio: 1.6,
+          mainAxisSpacing: 16,
+          mainAxisExtent: 150,
+        ),
+        itemBuilder: (context, index) {
+          User item = list[index];
+          return Container(
+            padding: EdgeInsets.fromLTRB(13, 20, 16, 10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: CircleAvatar(
+                        radius: 25,
+                        backgroundImage: NetworkImage('${item.avatar}'),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ResponsiveText(text: '${item.name}'),
+                          ResponsiveText(text: '${item.position}'),
+                          ResponsiveText(text: '${item.company}'),
+                          ResponsiveText(text: '${item.address}'),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          ResponsiveText(text: '${item.age}'),
+                          ResponsiveText(text: '${item.job}'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                      border: Border.all(
+                        color: boderContainerColor,
+                        width: 0.3,
+                      )),
+                  child: ResponsiveText(text: '${item.bio}'),
+                ),
+              ],
+            ),
+          );
+        },
       ),
-      itemBuilder: (context, index) {
-        User item = list[index];
-        return Container(
-          padding: EdgeInsets.fromLTRB(13, 20, 16, 10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage('${item.avatar}'),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ResponsiveText(text: '${item.name}'),
-                        ResponsiveText(text: '${item.position}'),
-                        ResponsiveText(text: '${item.company}'),
-                        ResponsiveText(text: '${item.address}'),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        ResponsiveText(text: '${item.age}'),
-                        ResponsiveText(text: '${item.job}'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5),
-                    ),
-                    border: Border.all(
-                      color: boderContainerColor,
-                      width: 0.3,
-                    )),
-                child: ResponsiveText(text: '${item.bio}'),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }
