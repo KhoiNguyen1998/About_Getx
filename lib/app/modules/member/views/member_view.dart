@@ -158,7 +158,7 @@ class MemberView extends GetView<MemberController> {
     );
   }
 
-  GridView gridMember(RxList list) {
+  Widget gridMember(RxList list) {
     return GridView.builder(
       shrinkWrap: true,
       itemCount: list.length,
