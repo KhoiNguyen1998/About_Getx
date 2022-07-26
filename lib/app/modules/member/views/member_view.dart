@@ -19,105 +19,109 @@ class MemberView extends GetView<MemberController> {
         initialIndex: 0,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: AppBar(
-            elevation: 0,
-            toolbarHeight: 82,
-            backgroundColor: headerColor,
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(svg_back),
-                ),
-                SvgPicture.asset(svg_logo),
-                IconButton(
-                  onPressed: () {},
-                  icon: SvgPicture.asset(svg_setting),
-                ),
-              ],
-            ),
-          ),
-          body: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.only(right: 10.0),
-                color: searchBoxColor,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+          body: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                elevation: 0,
+                toolbarHeight: 82,
+                backgroundColor: headerColor,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                     IconButton(
                       onPressed: () {},
-                      icon: SvgPicture.asset(svg_search),
+                      icon: SvgPicture.asset(svg_back),
                     ),
-                    Text(
-                      sortByConditions,
-                      style: GoogleFonts.notoSans(
-                          fontSize: 10, fontWeight: FontWeight.w700),
+                    SvgPicture.asset(svg_logo),
+                    IconButton(
+                      onPressed: () {},
+                      icon: SvgPicture.asset(svg_setting),
                     ),
-                  ],
-                ),
-              ),
-              TabBar(
-                controller: controller.tabController,
-                unselectedLabelColor: unSelectLabelColor,
-                labelColor: selectedLabelColor,
-                isScrollable: true,
-                indicatorColor: Colors.transparent,
-                labelStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-                tabs: [
-                  Tab(
-                    child: Container(
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(svg_dis_Clock),
-                          // Obx(() => controller.selectedIndex),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            showRecentlyLoggedUsers,
-                            style: GoogleFonts.notoSans(
-                                fontSize: 10, fontWeight: FontWeight.w700),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Tab(
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(svg_monorchy),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          showUsersRank,
-                          style: GoogleFonts.notoSans(
-                              fontSize: 10, fontWeight: FontWeight.w700),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Divider(
-                height: 1,
-              ),
-              Expanded(
-                child: TabBarView(
-                  controller: controller.tabController,
-                  children: [
-                    Obx(() => gridMember(controller.listNormalMember,
-                        controller.addNormalMEmber())),
-                    Obx(() => gridMember(controller.listPremiumMember,
-                        controller.addPremiumMember())),
                   ],
                 ),
               ),
             ],
+            //  child: Column(
+            //   children: [
+            //     Container(
+            //       padding: EdgeInsets.only(right: 10.0),
+            //       color: searchBoxColor,
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.end,
+            //         children: <Widget>[
+            //           IconButton(
+            //             onPressed: () {},
+            //             icon: SvgPicture.asset(svg_search),
+            //           ),
+            //           Text(
+            //             sortByConditions,
+            //             style: GoogleFonts.notoSans(
+            //                 fontSize: 10, fontWeight: FontWeight.w700),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //     TabBar(
+            //       controller: controller.tabController,
+            //       unselectedLabelColor: unSelectLabelColor,
+            //       labelColor: selectedLabelColor,
+            //       isScrollable: true,
+            //       indicatorColor: Colors.transparent,
+            //       labelStyle: TextStyle(
+            //         fontWeight: FontWeight.bold,
+            //       ),
+            //       tabs: [
+            //         Tab(
+            //           child: Container(
+            //             child: Row(
+            //               children: [
+            //                 SvgPicture.asset(svg_dis_Clock),
+            //                 // Obx(() => controller.selectedIndex),
+            //                 SizedBox(
+            //                   width: 4,
+            //                 ),
+            //                 Text(
+            //                   showRecentlyLoggedUsers,
+            //                   style: GoogleFonts.notoSans(
+            //                       fontSize: 10, fontWeight: FontWeight.w700),
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
+            //         ),
+            //         Tab(
+            //           child: Row(
+            //             children: [
+            //               SvgPicture.asset(svg_monorchy),
+            //               SizedBox(
+            //                 width: 4,
+            //               ),
+            //               Text(
+            //                 showUsersRank,
+            //                 style: GoogleFonts.notoSans(
+            //                     fontSize: 10, fontWeight: FontWeight.w700),
+            //               ),
+            //             ],
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //     Divider(
+            //       height: 1,
+            //     ),
+            //     Expanded(
+            //       child: TabBarView(
+            //         controller: controller.tabController,
+            //         children: [
+            //           Obx(() => gridMember(controller.listNormalMember,
+            //               controller.addNormalMEmber())),
+            //           Obx(() => gridMember(controller.listPremiumMember,
+            //               controller.addPremiumMember())),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            //          ),
           ),
           //  buildTabbar(),
           bottomNavigationBar: BottomNavigationBar(
@@ -237,7 +241,7 @@ class MemberView extends GetView<MemberController> {
                       child: AutoSizeText(
                         '${item.bio}',
                         maxLines: 2,
-                        minFontSize: 10,
+                        minFontSize: 8,
                         maxFontSize: 15,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
