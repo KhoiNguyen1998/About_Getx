@@ -19,112 +19,113 @@ class MemberView extends GetView<MemberController> {
         initialIndex: 0,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                pinned: false,
-                elevation: 0,
-                toolbarHeight: 82,
-                backgroundColor: headerColor,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: SvgPicture.asset(svg_back),
+          body: NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return <Widget>[
+                SliverAppBar(
+                  elevation: 0,
+                  toolbarHeight: 82,
+                  backgroundColor: headerColor,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(svg_back),
+                      ),
+                      SvgPicture.asset(svg_logo),
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(svg_setting),
+                      ),
+                    ],
+                  ),
+                ),
+              ];
+            },
+            body: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(right: 10.0),
+                  color: searchBoxColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(svg_search),
+                      ),
+                      Text(
+                        sortByConditions,
+                        style: GoogleFonts.notoSans(
+                            fontSize: 10, fontWeight: FontWeight.w700),
+                      ),
+                    ],
+                  ),
+                ),
+                TabBar(
+                  controller: controller.tabController,
+                  unselectedLabelColor: unSelectLabelColor,
+                  labelColor: selectedLabelColor,
+                  isScrollable: true,
+                  indicatorColor: Colors.transparent,
+                  labelStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  tabs: [
+                    Tab(
+                      child: Container(
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(svg_dis_Clock),
+                            // Obx(() => controller.selectedIndex),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              showRecentlyLoggedUsers,
+                              style: GoogleFonts.notoSans(
+                                  fontSize: 10, fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    SvgPicture.asset(svg_logo),
-                    IconButton(
-                      onPressed: () {},
-                      icon: SvgPicture.asset(svg_setting),
+                    Tab(
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(svg_monorchy),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Text(
+                            showUsersRank,
+                            style: GoogleFonts.notoSans(
+                                fontSize: 10, fontWeight: FontWeight.w700),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
-            //  child: Column(
-            //   children: [
-            //     Container(
-            //       padding: EdgeInsets.only(right: 10.0),
-            //       color: searchBoxColor,
-            //       child: Row(
-            //         mainAxisAlignment: MainAxisAlignment.end,
-            //         children: <Widget>[
-            //           IconButton(
-            //             onPressed: () {},
-            //             icon: SvgPicture.asset(svg_search),
-            //           ),
-            //           Text(
-            //             sortByConditions,
-            //             style: GoogleFonts.notoSans(
-            //                 fontSize: 10, fontWeight: FontWeight.w700),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     TabBar(
-            //       controller: controller.tabController,
-            //       unselectedLabelColor: unSelectLabelColor,
-            //       labelColor: selectedLabelColor,
-            //       isScrollable: true,
-            //       indicatorColor: Colors.transparent,
-            //       labelStyle: TextStyle(
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //       tabs: [
-            //         Tab(
-            //           child: Container(
-            //             child: Row(
-            //               children: [
-            //                 SvgPicture.asset(svg_dis_Clock),
-            //                 // Obx(() => controller.selectedIndex),
-            //                 SizedBox(
-            //                   width: 4,
-            //                 ),
-            //                 Text(
-            //                   showRecentlyLoggedUsers,
-            //                   style: GoogleFonts.notoSans(
-            //                       fontSize: 10, fontWeight: FontWeight.w700),
-            //                 ),
-            //               ],
-            //             ),
-            //           ),
-            //         ),
-            //         Tab(
-            //           child: Row(
-            //             children: [
-            //               SvgPicture.asset(svg_monorchy),
-            //               SizedBox(
-            //                 width: 4,
-            //               ),
-            //               Text(
-            //                 showUsersRank,
-            //                 style: GoogleFonts.notoSans(
-            //                     fontSize: 10, fontWeight: FontWeight.w700),
-            //               ),
-            //             ],
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //     Divider(
-            //       height: 1,
-            //     ),
-            //     Expanded(
-            //       child: TabBarView(
-            //         controller: controller.tabController,
-            //         children: [
-            //           Obx(() => gridMember(controller.listNormalMember,
-            //               controller.addNormalMEmber())),
-            //           Obx(() => gridMember(controller.listPremiumMember,
-            //               controller.addPremiumMember())),
-            //         ],
-            //       ),
-            //     ),
-            //   ],
-            //          ),
+                Divider(
+                  height: 1,
+                ),
+                Expanded(
+                  child: TabBarView(
+                    controller: controller.tabController,
+                    children: [
+                      Obx(() => gridMember(controller.listNormalMember,
+                          controller.addNormalMEmber())),
+                      Obx(() => gridMember(controller.listPremiumMember,
+                          controller.addPremiumMember())),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-          //  buildTabbar(),
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: backgroundAppbarColor,
             selectedItemColor: textBottombarColor,
