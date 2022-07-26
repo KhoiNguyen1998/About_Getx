@@ -6,6 +6,7 @@ import 'package:flutter_getx_ttr/until/responsive_text.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/member_controller.dart';
 
@@ -51,8 +52,8 @@ class MemberView extends GetView<MemberController> {
                     ),
                     Text(
                       sortByConditions,
-                      style: TextStyle(
-                          fontSize: 10.0, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.notoSans(
+                          fontSize: 10, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),
@@ -78,7 +79,8 @@ class MemberView extends GetView<MemberController> {
                           ),
                           Text(
                             showRecentlyLoggedUsers,
-                            style: TextStyle(fontSize: 10.0),
+                            style: GoogleFonts.notoSans(
+                                fontSize: 10, fontWeight: FontWeight.w700),
                           ),
                         ],
                       ),
@@ -93,7 +95,8 @@ class MemberView extends GetView<MemberController> {
                         ),
                         Text(
                           showUsersRank,
-                          style: TextStyle(fontSize: 10.0),
+                          style: GoogleFonts.notoSans(
+                              fontSize: 10, fontWeight: FontWeight.w700),
                         ),
                       ],
                     ),
@@ -238,6 +241,8 @@ class MemberView extends GetView<MemberController> {
                         maxFontSize: 15,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
+                        style:
+                            GoogleFonts.notoSans(fontWeight: FontWeight.w700),
                       ),
                     ),
                   ),

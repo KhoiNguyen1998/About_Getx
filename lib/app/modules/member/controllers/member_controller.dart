@@ -18,10 +18,6 @@ class MemberController extends GetxController
     addNormalMEmber();
     addPremiumMember();
     tabController = TabController(length: 2, vsync: this);
-    // tabController.addListener(() {
-    //   if (tabController.index == 0) {
-    //   } else {}
-    // });
   }
 
   @override
