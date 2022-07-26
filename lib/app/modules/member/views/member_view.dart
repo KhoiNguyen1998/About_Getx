@@ -22,6 +22,7 @@ class MemberView extends GetView<MemberController> {
           body: CustomScrollView(
             slivers: [
               SliverAppBar(
+                pinned: false,
                 elevation: 0,
                 toolbarHeight: 82,
                 backgroundColor: headerColor,
