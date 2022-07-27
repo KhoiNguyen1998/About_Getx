@@ -154,9 +154,12 @@ class MemberView extends GetView<MemberController> {
             backgroundColor: backgroundAppbarColor,
             selectedItemColor: textBottombarColor,
             unselectedItemColor: colorBottomIcon,
-            unselectedLabelStyle: TextStyle(
-              color: textBottombarColor,
-              overflow: TextOverflow.ellipsis,
+            unselectedLabelStyle: GoogleFonts.notoSans(
+              textStyle: TextStyle(
+                overflow: TextOverflow.ellipsis,
+                fontSize: 6,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             selectedLabelStyle: TextStyle(color: textBottombarColor),
             showUnselectedLabels: true,
@@ -204,82 +207,196 @@ class MemberView extends GetView<MemberController> {
           crossAxisSpacing: 16,
           childAspectRatio: 1.6,
           mainAxisSpacing: 16,
-          mainAxisExtent: 150,
+          mainAxisExtent: 175,
         ),
         itemBuilder: (context, index) {
           User item = list[index];
-          return Container(
-            padding: EdgeInsets.fromLTRB(13, 20, 16, 10),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: CircleAvatar(
-                        radius: 25,
-                        backgroundImage: NetworkImage('${item.avatar}'),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          ResponsiveText(text: '${item.name}'),
-                          ResponsiveText(text: '${item.position}'),
-                          ResponsiveText(text: '${item.company}'),
-                          ResponsiveText(text: '${item.address}'),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          ResponsiveText(text: '${item.age}'),
-                          ResponsiveText(text: '${item.job}'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Expanded(
-                  child: Container(
-                    height: 38,
-                    padding: EdgeInsets.all(10),
+          if (item.isPremium == true) {
+            return Container(
+              padding: EdgeInsets.fromLTRB(13, 20, 16, 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    alignment: Alignment.topLeft,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(5),
+                      color: pinkSeaShellColor,
+                      border: Border.all(color: borderRankColor),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    width: 62,
+                    height: 18,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: SvgPicture.asset(svg_medal),
                         ),
-                        border: Border.all(
-                          color: boderContainerColor,
-                          width: 0.3,
-                        )),
-                    child: Center(
-                      child: AutoSizeText(
-                        '${item.bio}',
-                        maxLines: 2,
-                        minFontSize: 8,
-                        maxFontSize: 15,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style:
-                            GoogleFonts.notoSans(fontWeight: FontWeight.w700),
+                        Expanded(
+                          flex: 2,
+                          child: Text(
+                            '${(index + 1).toString() + rank}',
+                            style: GoogleFonts.notoSans(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: CircleAvatar(
+                          radius: 25,
+                          backgroundImage: NetworkImage('${item.avatar}'),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ResponsiveText(text: '${item.name}'),
+                            ResponsiveText(text: '${item.position}'),
+                            ResponsiveText(text: '${item.company}'),
+                            ResponsiveText(text: '${item.address}'),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            ResponsiveText(text: '${item.age}'),
+                            ResponsiveText(text: '${item.job}'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 38,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                          border: Border.all(
+                            color: boderContainerColor,
+                            width: 0.3,
+                          )),
+                      child: Center(
+                        child: AutoSizeText(
+                          '${item.bio}',
+                          maxLines: 2,
+                          minFontSize: 8,
+                          maxFontSize: 15,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style:
+                              GoogleFonts.notoSans(fontWeight: FontWeight.w700),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          );
+                ],
+              ),
+            );
+          } else {
+            return Container(
+              padding: EdgeInsets.fromLTRB(13, 20, 16, 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    width: 62,
+                    height: 18,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: CircleAvatar(
+                          radius: 25,
+                          backgroundImage: NetworkImage('${item.avatar}'),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ResponsiveText(text: '${item.name}'),
+                            ResponsiveText(text: '${item.position}'),
+                            ResponsiveText(text: '${item.company}'),
+                            ResponsiveText(text: '${item.address}'),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            ResponsiveText(text: '${item.age}'),
+                            ResponsiveText(text: '${item.job}'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 38,
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                          border: Border.all(
+                            color: boderContainerColor,
+                            width: 0.3,
+                          )),
+                      child: Center(
+                        child: AutoSizeText(
+                          '${item.bio}',
+                          maxLines: 2,
+                          minFontSize: 8,
+                          maxFontSize: 15,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style:
+                              GoogleFonts.notoSans(fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
         },
       ),
     );

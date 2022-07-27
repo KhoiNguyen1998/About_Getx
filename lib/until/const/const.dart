@@ -15,6 +15,7 @@ const String svg_search = 'assets/svg/Vector.svg';
 const String svg_back = 'assets/svg/back.svg';
 const String svg_setting = 'assets/svg/symbol.svg';
 const String svg_dis_Clock = 'assets/svg/disable_clock.svg';
+const String svg_medal = 'assets/svg/medal.svg';
 
 /// Color
 const colorBottomIcon = const Color(0xFF212862);
@@ -26,6 +27,8 @@ const textSearchColor = const Color(0xFF060606);
 const unSelectLabelColor = const Color(0xFF939598);
 const selectedLabelColor = const Color(0xFF212862);
 const boderContainerColor = const Color(0xFFDD4A30);
+const pinkSeaShellColor = const Color(0xFFFFF8F3);
+const borderRankColor = const Color(0xFFE1E1E1);
 
 /// String
 
@@ -38,5 +41,6 @@ const String message = 'メッセージ';
 const String sortByConditions = '詳細条件を指定して検索する';
 const String showRecentlyLoggedUsers = '最近ログインしたユーザーを表示';
 const String showUsersRank = 'ユーザーランキングを表示';
+const String rank = '位';
 // group string
 var myGroup = AutoSizeGroup();

@@ -7,8 +7,7 @@ class MemberController extends GetxController
     with GetSingleTickerProviderStateMixin {
   final listNormalMember = [].obs;
   final listPremiumMember = [].obs;
-  final selectedIndex = 0.obs;
-  final isShowing = false.obs;
+  final isShowing = true.obs;
 
   late TabController tabController;
 
