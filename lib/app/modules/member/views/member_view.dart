@@ -78,7 +78,12 @@ class MemberView extends GetView<MemberController> {
                       child: Container(
                         child: Row(
                           children: [
-                            SvgPicture.asset(svg_dis_Clock),
+                            // SvgPicture.asset(svg_dis_Clock),
+                            Obx(() {
+                              return controller.isShowing.value
+                                  ? SvgPicture.asset(svg_clock)
+                                  : SvgPicture.asset(svg_dis_Clock);
+                            }),
                             SizedBox(
                               width: 4,
                             ),
@@ -94,7 +99,11 @@ class MemberView extends GetView<MemberController> {
                     Tab(
                       child: Row(
                         children: [
-                          SvgPicture.asset(svg_monorchy),
+                          Obx(() {
+                            return controller.isShowing.value
+                                ? SvgPicture.asset(svg_monorchy)
+                                : SvgPicture.asset(svg_monarchy_gold);
+                          }),
                           SizedBox(
                             width: 4,
                           ),

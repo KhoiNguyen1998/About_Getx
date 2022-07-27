@@ -7,11 +7,9 @@ class MemberController extends GetxController
     with GetSingleTickerProviderStateMixin {
   final listNormalMember = [].obs;
   final listPremiumMember = [].obs;
+  final selectedIndex = 0.obs;
+  final isShowing = false.obs;
 
-  RxBool isLoading = false.obs;
-
-  // final iconStatus = false.obs;
-  // final tabIndex = 0.obs;
   late TabController tabController;
 
   @override
@@ -20,6 +18,7 @@ class MemberController extends GetxController
     addNormalMEmber();
     addPremiumMember();
     tabController = TabController(length: 2, vsync: this);
+    wipeContrller();
   }
 
   @override
@@ -34,7 +33,6 @@ class MemberController extends GetxController
   }
 
   addNormalMEmber() async {
-    isLoading.value = true;
     var list = await UserProvider().fetchNormalMember();
     if (list != null) {
       listNormalMember.assignAll(list);
@@ -42,10 +40,26 @@ class MemberController extends GetxController
   }
 
   addPremiumMember() async {
-    isLoading.value = true;
     var list = await UserProvider().fetchPremiumMember();
     if (list != null) {
       listPremiumMember.assignAll(list);
     }
+  }
+
+  wipeContrller() {
+    tabController.addListener(() {
+      switch (tabController.index) {
+        case 0:
+          isShowing.value = true;
+          print(tabController.index.toString());
+          break;
+        case 1:
+          isShowing.value = false;
+          print(tabController.index.toString());
+
+          break;
+        default:
+      }
+    });
   }
 }
