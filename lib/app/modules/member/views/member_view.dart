@@ -79,7 +79,6 @@ class MemberView extends GetView<MemberController> {
                         child: Row(
                           children: [
                             SvgPicture.asset(svg_dis_Clock),
-                            // Obx(() => controller.selectedIndex),
                             SizedBox(
                               width: 4,
                             ),
@@ -116,14 +115,26 @@ class MemberView extends GetView<MemberController> {
                   child: TabBarView(
                     controller: controller.tabController,
                     children: [
-                      Obx(() => controller.isLoading.value
-                          ? Center(child: CircularProgressIndicator())
-                          : gridMember(controller.listNormalMember,
-                              controller.addNormalMEmber())),
-                      Obx(() => controller.isLoading.value
-                          ? Center(child: CircularProgressIndicator())
-                          : gridMember(controller.listPremiumMember,
-                              controller.addPremiumMember())),
+                      // Obx(() => controller.isLoading.value
+                      //     ? gridMember(controller.listNormalMember,
+                      //         controller.addNormalMEmber())
+                      //     : Center(child: CircularProgressIndicator())),
+                      Obx(() {
+                        return controller.listNormalMember.length != 0
+                            ? gridMember(controller.listNormalMember,
+                                controller.addNormalMEmber())
+                            : Center(
+                                child: CircularProgressIndicator(),
+                              );
+                      }),
+                      Obx(() {
+                        return controller.listPremiumMember.length != 0
+                            ? gridMember(controller.listPremiumMember,
+                                controller.addPremiumMember())
+                            : Center(
+                                child: CircularProgressIndicator(),
+                              );
+                      }),
                     ],
                   ),
                 ),

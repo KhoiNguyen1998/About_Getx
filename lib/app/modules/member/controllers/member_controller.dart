@@ -10,8 +10,8 @@ class MemberController extends GetxController
 
   RxBool isLoading = false.obs;
 
-  final iconStatus = false.obs;
-  final tabIndex = 0.obs;
+  // final iconStatus = false.obs;
+  // final tabIndex = 0.obs;
   late TabController tabController;
 
   @override
@@ -39,7 +39,6 @@ class MemberController extends GetxController
     if (list != null) {
       listNormalMember.assignAll(list);
     }
-    isLoading.value = false;
   }
 
   addPremiumMember() async {
@@ -48,6 +47,5 @@ class MemberController extends GetxController
     if (list != null) {
       listPremiumMember.assignAll(list);
     }
-    isLoading.value = false;
   }
 }
