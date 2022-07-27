@@ -219,7 +219,6 @@ class MemberView extends GetView<MemberController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    alignment: Alignment.topLeft,
                     decoration: BoxDecoration(
                       color: pinkSeaShellColor,
                       border: Border.all(color: borderRankColor),
@@ -228,15 +227,14 @@ class MemberView extends GetView<MemberController> {
                     width: 62,
                     height: 18,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Expanded(
-                          flex: 1,
-                          child: SvgPicture.asset(svg_medal),
-                        ),
+                        Expanded(flex: 1, child: SvgPicture.asset(svg_medal)),
                         Expanded(
                           flex: 2,
                           child: Text(
                             '${(index + 1).toString() + rank}',
+                            textAlign: TextAlign.center,
                             style: GoogleFonts.notoSans(
                               fontSize: 10,
                               fontWeight: FontWeight.w400,
@@ -321,10 +319,23 @@ class MemberView extends GetView<MemberController> {
               padding: EdgeInsets.fromLTRB(13, 20, 16, 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: 62,
+                    width: 72,
                     height: 18,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: blueBorderColor),
+                    ),
+                    child: Text(
+                      confirmedpersonaldocuments,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.notoSans(
+                        fontSize: 8,
+                        fontWeight: FontWeight.w400,
+                        color: blueBorderColor,
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: 5,

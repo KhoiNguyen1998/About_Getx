@@ -29,6 +29,7 @@ const selectedLabelColor = const Color(0xFF212862);
 const boderContainerColor = const Color(0xFFDD4A30);
 const pinkSeaShellColor = const Color(0xFFFFF8F3);
 const borderRankColor = const Color(0xFFE1E1E1);
+const blueBorderColor = const Color(0xFF212862);
 
 /// String
 
@@ -41,6 +42,7 @@ const String message = 'メッセージ';
 const String sortByConditions = '詳細条件を指定して検索する';
 const String showRecentlyLoggedUsers = '最近ログインしたユーザーを表示';
 const String showUsersRank = 'ユーザーランキングを表示';
+const String confirmedpersonaldocuments = '確認済みの個人文書';
 const String rank = '位';
 // group string
 var myGroup = AutoSizeGroup();
