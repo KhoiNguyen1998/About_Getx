@@ -116,10 +116,14 @@ class MemberView extends GetView<MemberController> {
                   child: TabBarView(
                     controller: controller.tabController,
                     children: [
-                      Obx(() => gridMember(controller.listNormalMember,
-                          controller.addNormalMEmber())),
-                      Obx(() => gridMember(controller.listPremiumMember,
-                          controller.addPremiumMember())),
+                      Obx(() => controller.isLoading.value
+                          ? Center(child: CircularProgressIndicator())
+                          : gridMember(controller.listNormalMember,
+                              controller.addNormalMEmber())),
+                      Obx(() => controller.isLoading.value
+                          ? Center(child: CircularProgressIndicator())
+                          : gridMember(controller.listPremiumMember,
+                              controller.addPremiumMember())),
                     ],
                   ),
                 ),

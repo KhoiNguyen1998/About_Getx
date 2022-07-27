@@ -8,6 +8,8 @@ class MemberController extends GetxController
   final listNormalMember = [].obs;
   final listPremiumMember = [].obs;
 
+  RxBool isLoading = false.obs;
+
   final iconStatus = false.obs;
   final tabIndex = 0.obs;
   late TabController tabController;
@@ -32,16 +34,20 @@ class MemberController extends GetxController
   }
 
   addNormalMEmber() async {
+    isLoading.value = true;
     var list = await UserProvider().fetchNormalMember();
     if (list != null) {
       listNormalMember.assignAll(list);
     }
+    isLoading.value = false;
   }
 
   addPremiumMember() async {
+    isLoading.value = true;
     var list = await UserProvider().fetchPremiumMember();
     if (list != null) {
       listPremiumMember.assignAll(list);
     }
+    isLoading.value = false;
   }
 }
