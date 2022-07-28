@@ -161,7 +161,13 @@ class MemberView extends GetView<MemberController> {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            selectedLabelStyle: TextStyle(color: textBottombarColor),
+            selectedLabelStyle: GoogleFonts.notoSans(
+              textStyle: TextStyle(
+                overflow: TextOverflow.ellipsis,
+                fontSize: 6,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
             showUnselectedLabels: true,
             showSelectedLabels: true,
             items: <BottomNavigationBarItem>[

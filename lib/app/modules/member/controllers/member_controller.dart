@@ -8,7 +8,6 @@ class MemberController extends GetxController
   final listNormalMember = [].obs;
   final listPremiumMember = [].obs;
   final isShowing = true.obs;
-
   late TabController tabController;
 
   @override
