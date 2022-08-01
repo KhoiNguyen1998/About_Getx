@@ -124,17 +124,24 @@ class MemberView extends GetView<MemberController> {
                     controller: controller.tabController,
                     children: [
                       Obx(() {
-                        return controller.listNormalMember.length != 0
-                            ? gridMember(controller.listNormalMember,
-                                controller.addNormalMEmber())
-                            : Center(
+                        return controller.isFirstLoadRunning.value
+                            ? Center(
                                 child: CircularProgressIndicator(),
-                              );
+                              )
+                            : gridMember(
+                                controller.post, controller.firstLoad());
+
+                        // return controller.post.length != 0
+                        //     ? gridMember(
+                        //         controller.post, controller.firstLoad())
+                        //     : Center(
+                        //         child: CircularProgressIndicator(),
+                        //       );
                       }),
                       Obx(() {
-                        return controller.listPremiumMember.length != 0
-                            ? gridMember(controller.listPremiumMember,
-                                controller.addPremiumMember())
+                        return controller.post.length != 0
+                            ? gridMember(
+                                controller.post, controller.firstLoad())
                             : Center(
                                 child: CircularProgressIndicator(),
                               );
@@ -201,6 +208,7 @@ class MemberView extends GetView<MemberController> {
     return RefreshIndicator(
       onRefresh: () => refresh,
       child: GridView.builder(
+        // controller: controller.scrollController,
         shrinkWrap: true,
         itemCount: list.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -4,9 +4,8 @@ import 'package:flutter_getx_ttr/app/data/model/author.dart';
 class UserProvider {
   final String url = 'https://agrichapp.herokuapp.com/members';
   Dio dio = Dio();
+  final int limit = 10;
   // limti of item in page
-  final int _limit = 10;
-  int _page = 0;
   Future<List<User>?> fetchPremiumMember() async {
     try {
       final res = await dio.get(url, queryParameters: {'isPremium': true});
@@ -38,8 +37,10 @@ class UserProvider {
     }
   }
 
-  Future<List<User>?> fetchUserWithLimit() async {
-    final res = await dio.get('$url?page=$_page&_limit =$_limit');
+  Future<List<User>?> fetchUserWithLimit({
+    required int page,
+  }) async {
+    final res = await dio.get('$url?page=$page&_limit=$limit');
     try {
       if (res.statusCode == 200) {
         var getMemeber = res.data as List;

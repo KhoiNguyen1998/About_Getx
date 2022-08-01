@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_ttr/app/data/model/author.dart';
 import 'package:flutter_getx_ttr/app/data/provider/api_provider.dart';
@@ -5,26 +6,28 @@ import 'package:get/get.dart';
 
 class MemberController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  final listNormalMember = [].obs;
-  final listPremiumMember = [].obs;
+  // final listNormalMember = [].obs;
+  // final listPremiumMember = [].obs;
   final isShowing = true.obs;
-  final _isHaveNextPage = true.obs;
-  final _isFirstLoadRunning = false.obs;
-  final _isLoadMoreRunning = false.obs;
-  final _post = <User>[].obs;
-  final _page = 0.obs;
+  final isHaveNextPage = true.obs;
+  final isFirstLoadRunning = false.obs;
+  final isLoadMoreRunning = false.obs;
+  final post = <User>[].obs;
+  final page = 0.obs;
 
   late TabController tabController;
   late ScrollController scrollController;
 
   @override
   void onInit() {
-    super.onInit();
-    firtLoad();
-    addNormalMEmber();
-    addPremiumMember();
+    firstLoad();
+    scrollController = ScrollController()..addListener(loadMore);
+    loadMore();
+    // addNormalMEmber();
+    // addPremiumMember();
     tabController = TabController(length: 2, vsync: this);
     wipeController();
+    super.onInit();
   }
 
   @override
@@ -35,46 +38,54 @@ class MemberController extends GetxController
   @override
   void onClose() {
     tabController.dispose();
+    scrollController.removeListener(loadMore);
     super.onClose();
   }
 
-  firtLoad() async {
+  firstLoad() async {
     try {
-      var listData = await UserProvider().fetchUserWithLimit(page: _page.value);
-      _post.assignAll(listData!);
+      var listData = await UserProvider().fetchUserWithLimit(
+        page: page.value,
+      );
+      post.assignAll(listData!);
     } catch (e) {
       print(e);
     }
   }
 
   loadMore() async {
-    if (_isHaveNextPage.value == true &&
-        _isFirstLoadRunning.value == false &&
-        _isLoadMoreRunning.value == false &&
+    if (isHaveNextPage.value == true &&
+        isFirstLoadRunning.value == false &&
+        isLoadMoreRunning.value == false &&
         scrollController.position.extentAfter < 300) {
-      _isLoadMoreRunning.value = true;
-      _page.value += 1;
+      page.value += 1;
       try {
-        var fetchedPost =
-            await UserProvider().fetchUserWithLimit(page: _page.value);
+        var fetchedPost = await UserProvider().fetchUserWithLimit(
+          page: page.value,
+        );
         if (fetchedPost!.isNotEmpty) {
-          _post.addAll(fetchedPost);
+          post.assignAll(fetchedPost);
         } else {
-          _isHaveNextPage.value = false;
+          isHaveNextPage.value = false;
         }
-      } catch (e) {}
-    } else {}
+      } catch (e) {
+        if (kDebugMode) {
+          print('Something went wrong');
+        }
+      }
+      // isLoadMoreRunning.value = false;
+    }
   }
 
-  addNormalMEmber() async {
-    var list = await UserProvider().fetchNormalMember();
-    listNormalMember.assignAll(list!);
-  }
+  // addNormalMEmber() async {
+  //   var list = await UserProvider().fetchNormalMember();
+  //   listNormalMember.assignAll(list!);
+  // }
 
-  addPremiumMember() async {
-    var list = await UserProvider().fetchPremiumMember();
-    listPremiumMember.assignAll(list!);
-  }
+  // addPremiumMember() async {
+  //   var list = await UserProvider().fetchPremiumMember();
+  //   listPremiumMember.assignAll(list!);
+  // }
 
   wipeController() {
     tabController.addListener(() {
