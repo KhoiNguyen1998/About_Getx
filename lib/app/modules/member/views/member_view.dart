@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_ttr/app/data/model/author.dart';
-import 'package:flutter_getx_ttr/app/modules/member/views/normalmemberview_view.dart';
-import 'package:flutter_getx_ttr/app/modules/member/views/premiummemberview_view.dart';
 import 'package:flutter_getx_ttr/until/const/const.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -9,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/member_controller.dart';
+import 'normalmemberview_view.dart';
+import 'premiummemberview_view.dart';
 
 class MemberView extends GetView<MemberController> {
   @override
@@ -78,7 +78,6 @@ class MemberView extends GetView<MemberController> {
                       child: Container(
                         child: Row(
                           children: [
-                            // SvgPicture.asset(svg_dis_Clock),
                             Obx(() {
                               return controller.isShowing.value
                                   ? SvgPicture.asset(svg_clock)
@@ -124,10 +123,6 @@ class MemberView extends GetView<MemberController> {
                   child: TabBarView(
                     controller: controller.tabController,
                     children: [
-                      // Obx(() => controller.isLoading.value
-                      //     ? gridMember(controller.listNormalMember,
-                      //         controller.addNormalMEmber())
-                      //     : Center(child: CircularProgressIndicator())),
                       Obx(() {
                         return controller.listNormalMember.length != 0
                             ? gridMember(controller.listNormalMember,
